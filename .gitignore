@@ -3,3 +3,6 @@ env/
 files/
 .cache/
 .streamlit
+cache.db
+main.py
+temporary/
