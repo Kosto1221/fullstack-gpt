@@ -16,11 +16,11 @@ bcrypt                                   ==4.0.1
 beautifulsoup4                           ==4.12.
 black                                    ==23.9
 blinker                                  ==1.6.2
-blis                                     ==0.7.1
+blis                                     ==0.7.8
 Brotli                                   ==1.1.
 build                                    ==1.2.2.post1
 cachetools                               ==5.3.1
-catalogue                                ==2.0.
+catalogue                                ==2.0.6
 certifi                                  ==2024.2.2
 cffi                                     ==1.15.1
 chardet                                  ==5.2.0
