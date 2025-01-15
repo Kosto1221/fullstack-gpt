@@ -34,7 +34,7 @@ st.set_page_config(
 )
 
 @st.cache_resource(show_spinner="Embedding file...")
-def embed_file(file):
+def embed_file(file, api_key):
     file_content = file.read()
     file_path = f"./.cache/files/{file.name}"
     embeddings_path = f"./.cache/embeddings/{file.name}"
@@ -46,7 +46,7 @@ def embed_file(file):
     splitter = CharacterTextSplitter.from_tiktoken_encoder(separator="\n", chunk_size=600 , chunk_overlap=100)
     loader = UnstructuredFileLoader(file_path)
     docs = loader.load_and_split(text_splitter=splitter)
-    embeddings = OpenAIEmbeddings() 
+    embeddings = OpenAIEmbeddings(api_key=api_key) 
     cached_embeddings = CacheBackedEmbeddings.from_bytes_store(
         embeddings, cache_dir
     )
@@ -97,7 +97,7 @@ st.markdown(
 
 with st.sidebar:
     upload_disabled = True
-    api_key = st.text_input("Insert OpenAI API Key")
+    api_key = st.text_input("Insert OpenAI API Key", type="password")
     if api_key:
         try:
             openai.api_key = api_key
@@ -107,11 +107,10 @@ with st.sidebar:
             st.error("Invalid API key. Please check and try again.")
     
     file = st.file_uploader("Upload a .txt .pdf or .docx file", type=["pdf", "txt", "docx"], disabled=upload_disabled)
-
-llm = ChatOpenAI(model="gpt-4o-mini", api_key=api_key, temperature=0.1, streaming=True, callbacks=[ChatCallbackhandler()])
+    llm = ChatOpenAI(model="gpt-4o-mini", api_key=api_key, temperature=0.1, streaming=True, callbacks=[ChatCallbackhandler()])
 
 if file:
-    retriever = embed_file(file)
+    retriever = embed_file(file, api_key)
     send_message("I'm ready! Ask away!", "ai", save=False)
     paint_history()
     message = st.chat_input("Ask anything about your file...")
