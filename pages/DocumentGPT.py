@@ -103,11 +103,10 @@ with st.sidebar:
             openai.api_key = api_key
             openai.models.list()
             upload_disabled=False
+            llm = ChatOpenAI(model="gpt-4o-mini", api_key=api_key, temperature=0.1, streaming=True, callbacks=[ChatCallbackhandler()])
         except openai.AuthenticationError:
-            st.error("Invalid API key. Please check and try again.")
-    
-    file = st.file_uploader("Upload a .txt .pdf or .docx file", type=["pdf", "txt", "docx"], disabled=upload_disabled)
-    llm = ChatOpenAI(model="gpt-4o-mini", api_key=api_key, temperature=0.1, streaming=True, callbacks=[ChatCallbackhandler()])
+            st.error("Invalid API key. Please check and try again.")   
+    file = st.file_uploader("Upload a .txt .pdf or .docx file", type=["pdf", "txt", "docx"], disabled=upload_disabled)   
 
 if file:
     retriever = embed_file(file, api_key)
