@@ -5,6 +5,9 @@ st.set_page_config(
     page_icon="🤖",
 )
 
+with st.sidebar:
+    st.link_button("Visit repository", "https://github.com/Kosto1221/fullstack-gpt")
+
 st.markdown(
     """
     # Hello!

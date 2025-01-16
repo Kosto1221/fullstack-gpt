@@ -107,6 +107,7 @@ with st.sidebar:
         except openai.AuthenticationError:
             st.error("Invalid API key. Please check and try again.")   
     file = st.file_uploader("Upload a .txt .pdf or .docx file", type=["pdf", "txt", "docx"], disabled=upload_disabled)   
+    st.link_button("Visit repository", "https://github.com/Kosto1221/fullstack-gpt")
 
 if file:
     retriever = embed_file(file, api_key)
