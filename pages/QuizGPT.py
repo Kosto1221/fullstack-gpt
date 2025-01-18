@@ -185,7 +185,8 @@ else:
         col1, col2, col3 = st.columns([1, 5.7, 1], vertical_alignment="center")
 
         with col1:
-            if st.form_submit_button(disabled=len(st.session_state.grade) == 10):
+            submit_button = st.form_submit_button(disabled=len(st.session_state.grade) == 10)
+            if submit_button:
                 if len(st.session_state.grade) == 10:
                     if all(answer == "correct" for answer in st.session_state.grade):
                         st.balloons()
@@ -215,7 +216,8 @@ else:
             )
 
         with col3:
-            if st.form_submit_button("Restart"):
+            restart_button =  st.form_submit_button("Restart")
+            if restart_button:
                 for key in list(st.session_state.keys()):
                     del st.session_state[key]
                 st.rerun()
