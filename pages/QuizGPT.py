@@ -187,7 +187,7 @@ else:
         st.form_submit_button()
 
         with col1:
-            submit_button = st.form_submit_button(disabled=len(st.session_state.grade) == 10)
+            submit_button = st.form_submit_button(disabled=len(st.session_state.grade) == 10, key="submit_button")
             if submit_button:
                 if len(st.session_state.grade) == 10:
                     if all(answer == "correct" for answer in st.session_state.grade):
@@ -218,7 +218,7 @@ else:
             )
 
         with col3:
-            restart_button =  st.form_submit_button("Restart")
+            restart_button =  st.form_submit_button("Restart", key="restart_button")
             if restart_button:
                 for key in list(st.session_state.keys()):
                     del st.session_state[key]
