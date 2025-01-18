@@ -127,7 +127,7 @@ with st.sidebar:
             openai.api_key = api_key
             openai.models.list()
             change_disabled=False
-            llm  = ChatOpenAI(model="gpt-4o-mini", temperature=0.1, streaming=True, callbacks=[StreamingStdOutCallbackHandler()]).bind(function_call={"name":"create_quiz"}, functions=[function])
+            llm  = ChatOpenAI(model="gpt-4o-mini", temperature=0.1, streaming=True, api_key=api_key, callbacks=[StreamingStdOutCallbackHandler()]).bind(function_call={"name":"create_quiz"}, functions=[function])
         except openai.AuthenticationError:
             st.error("Invalid API key. Please check and try again.")   
 
