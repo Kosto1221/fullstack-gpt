@@ -7,6 +7,7 @@ from langchain.prompts import ChatPromptTemplate
 from langchain.callbacks import StreamingStdOutCallbackHandler
 import json
 import openai
+import os
 
 st.set_page_config(
     page_title="Quiz GPT",
@@ -97,6 +98,7 @@ questions_prompt = ChatPromptTemplate.from_messages(
 def split_file(file):
     file_content = file.read()
     file_path = f"./.cache/quiz_files/{file.name}"
+    os.makedirs(os.path.dirname(file_path), exist_ok=True)
     with open(file_path, "wb") as f:
         f.write(file_content)
     splitter = CharacterTextSplitter.from_tiktoken_encoder(separator="\n", chunk_size=600 , chunk_overlap=100)
