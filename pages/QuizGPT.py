@@ -68,22 +68,6 @@ questions_prompt = ChatPromptTemplate.from_messages(
 
             Each question should have 4 answers, three of them must be incorrect and one should be correct.
 
-            Use (o) to signal the correct answer.
-
-            Question example:
-
-            Question: What is the color of the ocean?
-            Answers: Red|Yellow|Green|Blue(o)
-
-            Question: What is the capital of Georgia?
-            Answers: Baku|Tbilisi(o)|Manila|Beirut
-
-            Question: When was Avatar released?
-            Answers: 2007|2001|2009(o)|1998
-
-            Question: Who was Julius Caesar?
-            Answers: A Roman Emperor(o)|Painter|Actor|Model
-
             Your turn!
 
             Context: {context}
