@@ -146,9 +146,6 @@ with st.sidebar:
 
 if "grade" not in st.session_state:
     st.session_state.grade = []
-
-if "clear_form" not in st.session_state:
-    st.session_state.clear_form = False
                 
 if not docs:
     st.markdown(
@@ -163,7 +160,7 @@ if not docs:
 else:
     response = run_quiz_chain(docs, topic if topic else file.name)
     correct_count = 0
-    with st.form("questions_form", clear_on_submit=st.session_state.clear_form):
+    with st.form("questions_form"):
         for i, question in enumerate(response["questions"]):
             st.write(f"{i+1} .",question["question"])
             value = st.radio(
@@ -184,10 +181,8 @@ else:
 
         col1, col2, col3 = st.columns([1, 5.7, 1])
 
-        st.form_submit_button()
-
         with col1:
-            submit_button = st.form_submit_button(disabled=len(st.session_state.grade) == 10, key="submit_button")
+            submit_button = st.form_submit_button("Submit", disabled=len(st.session_state.grade) == 10)
             if submit_button:
                 if len(st.session_state.grade) == 10:
                     if all(answer == "correct" for answer in st.session_state.grade):
@@ -205,7 +200,6 @@ else:
                     height: 100%;
                     font-size: 20px;
                     font-weight: bold;
-                    margin-top: -15px;
                 ">
                     <span style="margin-right: 10px;">SCORE</span>
                     <span style="margin-right: 10px;">:</span>
@@ -218,7 +212,7 @@ else:
             )
 
         with col3:
-            restart_button =  st.form_submit_button("Restart", key="restart_button")
+            restart_button = st.form_submit_button("Restart")
             if restart_button:
                 for key in list(st.session_state.keys()):
                     del st.session_state[key]
