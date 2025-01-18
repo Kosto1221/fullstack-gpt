@@ -182,7 +182,9 @@ else:
                 st.session_state.grade.append("wrong")
             st.divider()
 
-        col1, col2, col3 = st.columns([1, 5.7, 1], vertical_alignment="center")
+        col1, col2, col3 = st.columns([1, 5.7, 1])
+
+        st.form_submit_button()
 
         with col1:
             submit_button = st.form_submit_button(disabled=len(st.session_state.grade) == 10)
